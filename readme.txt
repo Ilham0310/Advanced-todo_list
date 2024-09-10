@@ -1,0 +1,2 @@
+templates we basically use to create templates like hmtl css or js and we can use them in our flask server
+WE USE bootstraap in index .html  we remove the body other than the links and paste the required component like navbar
