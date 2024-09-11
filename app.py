@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
-from flask_mail import Mail, Message
+
 from datetime import datetime, timedelta
 
 app = Flask(__name__)
@@ -10,16 +10,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-# Email configuration
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USE_SSL'] = False
-app.config['MAIL_USERNAME'] = 'testmy676@gmail.com'
-app.config['MAIL_PASSWORD'] = 'clashofclans123'
-app.config['MAIL_DEFAULT_SENDER'] = 'testmy676@gmail.com'
 
-mail = Mail(app)
 
 # Define the Todo model
 class Todo(db.Model):
@@ -41,19 +32,7 @@ class User(db.Model):
     def __repr__(self) -> str:
         return f"{self.username}"
 
-@app.route("/send_email")
-def send_email():
-    try:
-        msg = Message(
-            "Hello from Flask",
-            recipients=["ifhamhero123@gmail.com"]
-        )
-        msg.body = "This is a test email sent from a Flask web application!"
-        msg.html = "<h1>This is a test email</h1><p>Sent from <strong>Flask</strong>!</p>"
-        mail.send(msg)
-        return "Email sent successfully!"
-    except Exception as e:
-        return f"Error: {str(e)}"
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
